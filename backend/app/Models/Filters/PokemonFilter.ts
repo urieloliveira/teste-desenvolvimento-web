@@ -13,7 +13,45 @@ export default class PokemonFilter extends BaseModelFilter {
 
   name(name: string) {
     this.$query.where((builder) => {
-      builder.where('first_name', 'LIKE', `%${name}%`).orWhere('last_name', 'LIKE', `%${name}%`)
+      builder.where('name', 'LIKE', `%${name}%`)
+    })
+  }
+
+  types(types: number) {
+    this.$query.whereExists((query) =>
+      query.preload('types', (builder) => {
+        builder.where('type_id', types).
+      })
+    )
+  }
+
+  atk(atk: number) {
+    this.$query.where((builder) => {
+      builder.where('atk', '>', atk)
+    })
+  }
+
+  def(def: number) {
+    this.$query.where((builder) => {
+      builder.where('def', '>', def)
+    })
+  }
+
+  sta(sta: number) {
+    this.$query.where((builder) => {
+      builder.where('sta', '>', sta)
+    })
+  }
+
+  statTotal(statTotal: number) {
+    this.$query.where((builder) => {
+      builder.where('stat_total', '>', statTotal)
+    })
+  }
+
+  legendary(legendary: boolean) {
+    this.$query.where((builder) => {
+      builder.where('legendary', legendary)
     })
   }
 }

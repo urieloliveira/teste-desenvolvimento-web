@@ -60,16 +60,10 @@ export default class Pokemon extends compose(BaseModel, Filterable) {
   @column()
   public cp39: number
 
-  @manyToMany(() => Type, {
-    pivotColumns: ['priority'],
-    pivotTimestamps: true,
-  })
+  @manyToMany(() => Type)
   public types: ManyToMany<typeof Type>
 
-  @manyToMany(() => Weather, {
-    pivotColumns: ['priority'],
-    pivotTimestamps: true,
-  })
+  @manyToMany(() => Weather)
   public weathers: ManyToMany<typeof Weather>
 
   @column.dateTime({ autoCreate: true })
@@ -78,3 +72,5 @@ export default class Pokemon extends compose(BaseModel, Filterable) {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 }
+
+Pokemon.$getRelation('types').relationName

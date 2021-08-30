@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class Weather extends BaseSchema {
-  protected tableName = 'weather'
+  protected tableName = 'weathers'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {

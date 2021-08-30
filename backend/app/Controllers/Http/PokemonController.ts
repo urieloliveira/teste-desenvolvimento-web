@@ -7,12 +7,8 @@ export default class PokemonController {
     const { page, limit, filters = {} } = request.qs()
 
     const pokemon = await Pokemon.query()
-      .with('types', (query) => {
-        query.from('types').select('*')
-      })
-      .with('weathers', (query) => {
-        query.from('weathers').select('*')
-      })
+      .preload('types')
+      .preload('weathers')
       .filter(filters)
       .paginate(page || 1, limit || 20)
 
@@ -58,7 +54,11 @@ export default class PokemonController {
   }
 
   public async show({ params }: HttpContextContract) {
-    const pokemon = await Pokemon.findOrFail(params.id)
+    const pokemon = await Pokemon.query()
+      .preload('types')
+      .preload('weathers')
+      .where('id', params.id)
+      .firstOrFail()
 
     return pokemon
   }

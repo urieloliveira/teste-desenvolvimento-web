@@ -20,6 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('pokemon', 'PokemonController')
 Route.resource('type', 'TypeController')
+Route.resource('pokemon', 'PokemonController')
 Route.resource('weather', 'WeatherController')
